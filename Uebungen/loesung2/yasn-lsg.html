@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>YASN</title>
+        <meta charset="UTF-8">
+    </head>
+    <body>
+        <h1>YASN</h1>
+        <h2>Yet Another Social Network</h2>
+        <form action="zielseite.html" method="post" name="mein-formular">
+            <ul>
+                <li>Registriere Dich bei YASN
+                    <table>
+                        <tr>
+                            <td>Benutzername:</td>
+                            <td><input class="contact" name="username" type="text" size="20" maxlength="20" required autofocus></td>
+                        </tr>
+                        <tr>
+                            <td>Mobiltelefon:</td>
+                            <td><input class="contact" type="tel" name="telefon" required="required"></td>
+                        </tr>
+                        <tr>
+                            <td>Mailadresse:</td>
+                            <td><input class="contact" type="email" name="mailadresse" required="required"></td>
+                        </tr>
+                        <tr>
+                            <td>Wohnort:</td>
+                            <td><input class="contact" type="text" name="wohnort" list="cities"></td>
+                            <datalist id="cities">
+                                <option value="Hamburg">Hamburg</option>
+                                <option value="Hannover">Hannover</option>
+                                <option value="Bochum">Bochum</option>
+                                <option value="Berlin">Berlin</option>
+                                <option value="München">München</option>
+                            </datalist>
+                        </tr>
+                    </table>
+                </li>
+                <li id="invite">Lade Deine Freunde ein:<br>
+                    <input type="email" placeholder="Mehrere Mailadressen durch Komma trennen" size="55" name="mailadressen" multiple></td>
+                </li>
+                <li>Vervollständige Dein Profil:
+                    <table>
+                        <tr>
+                            <td>Homepage:</td>
+                            <td><input type="url" name="homepage"></td>
+                        </tr>
+                        <tr>
+                            <td>Geburtsdatum:</td>
+                            <td><input type="date" name="geburtstag" max="1998-10-01" min="1900-01-01"></td>
+                        </tr>
+                        <tr>
+                            <td>Geburtsort:</td>
+                            <td><input type="text" placeholder="Gib eine Stadt ein"></td>
+                        </tr>
+                    </table>
+                </li>
+                <li>Persönliche Einstellungen:<br>
+                Welche Hintergrundfarbe soll Dein Profil haben?
+                <input type="color" name="hintergrundfarbe">
+                </li>
+            </ol>
+            <input type="submit" value="Absenden">
+        </form>
+    </body>
+</html>

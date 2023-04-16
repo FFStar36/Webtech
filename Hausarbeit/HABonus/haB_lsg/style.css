@@ -1,0 +1,21 @@
+main + div + div {
+    background-color: violet;
+}
+
+article:first-of-type > div:nth-child(2) {
+    background-color: black;
+    color: white;
+}
+
+article + div {
+    background-color: red;
+}
+
+h2 + div > div:last-of-type {
+    background-color: green;
+}
+
+div div div div div div {
+    background-color: blue;
+    color: white;
+}

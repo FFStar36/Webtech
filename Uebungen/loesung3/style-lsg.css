@@ -1,0 +1,72 @@
+/* Tutoriumsaufgabe */
+
+body {
+	margin: 0px;
+	font-family: 'Open Sans Condensed', sans-serif;
+}
+
+h1, h2 {
+	margin: 0px;
+	padding: 20px 0px 0px 10px;
+	color: blue;
+	background-color: aliceblue;
+}
+
+.contact {
+	background-color: aliceblue;
+}
+
+li:first-letter {
+	color: blue;
+}
+
+#invite:hover {
+	background-color: aliceblue;
+}
+
+input[type^="submit"] {
+	background-color: white;
+}
+
+/* Zusatzaufgabe */
+
+h1 {
+	font-weight: bold;
+}
+
+h2 {
+	padding-bottom: 12px;
+	font-style: italic;
+	border-bottom: 1px solid blue;
+}
+
+li {
+	margin: 20px 0px;
+	padding: 5px 5px 10px 5px;
+	max-width: 480px;
+	list-style: none;
+	line-height: 1.6;
+	border: 1px solid black;
+	box-shadow: 2px 4px #888888;
+}
+
+li:first-line {
+	letter-spacing: 1px;
+	font-weight: bold;
+}
+
+input {
+	border: 1px solid blue;
+}
+
+input:focus {
+	border: 1px solid red;
+}
+
+input[type^="submit"] {
+	background-color: white;
+}
+
+input[type^="submit"]:hover {
+	background-color: aliceblue;
+}

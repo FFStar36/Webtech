@@ -1,0 +1,174 @@
+<html>
+  <head>
+    <meta charset="UTF-8">
+    <title>Webtechnologien WiSe 21/22 Hausaufgabe B</title>
+    <style>
+      html {
+        font-family: Verdana, Geneva, Tahoma, sans-serif;
+      }
+
+      .header {
+        width: 50%;
+        margin: 0 auto;
+      }
+
+      h3 {
+        margin-bottom: 0px;
+      }
+
+      table, th, td {
+        border: 1px solid black;
+        border-collapse: collapse;
+      }
+
+      table {
+        table-layout : fixed;
+      }
+
+      div {
+        margin-bottom: 20px;
+      }
+
+      td {
+        padding: 8px;
+        word-wrap: break-word
+      }
+    </style>
+  </head>
+  <body>
+    <div class="header">
+      <h1>Webtechnologien WiSe 21/22 Bonus Hausaufgabe</h1>
+      <p>
+        In dieser Aufgabe wollen wir uns wieder dem Prinzip der Funktionen höherer Ordnung
+        und den Lambda-Ausdrücken beschäftigen. Hierzu betrachten wir die Datensätze in
+        <code>haB/db/arrays.js</code>. Alle Aufgaben sollen in <code>index.js</code> bearbeitet
+        werden.
+      </p>
+      <p>
+        Sie haben sowohl in der Vorlesung, sowie den Tutorien und der Hausaufgabe 3 schon die Verwendung
+        von <code>filter(), map()</code> und <code>reduce()</code> kennengelernt und sollen dies nun wiederholen
+        sowie eine Funktion Höherer Ordnung selbst schreiben und der Array Klasse hinzufügen.
+      </p>
+    </div>
+    
+    <!-- Aufgabe 1 -->
+    <div>
+      <table width="50%" style="margin: 0 auto;">
+        <tbody id="a01">
+          <tr><td colspan="3"><h3>Aufgabe 1: foldRight (5 Punkte)</h3></td></tr>
+          <tr>
+            <td colspan="3">
+              <p>Betrachten Sie die Datei <code>index.js</code></p>
+              <p>
+                Erweitern Sie die Klasse Array um die Methode <code>foldRight()</code> welche ähnlich der Methode
+                <code>reduceRight()</code> ist. Jedoch wird die Methode <code>foldRight()</code> die übergebene
+                reducer-Funktion von rechts her in einer anderen Ordnung Anwenden. Die reducer-Funktion folgt dem Schema
+                (a,b)=>{ Logik }
+              </p>
+              <p>
+                Die Methode <code>foldRight()</code> bekommt nur einen Parameter übergeben, die reducer-Funktion. Wenn ein gegebenes
+                Array kein Inhalt hat, dann soll <code>null</code> zurückgegeben werden. Gibt es nur ein Element in dem Array, so
+                soll dieses Element zurückgegeben werden.
+              </p>
+              <p>
+                <b>Beispiel:</b> Gegeben sei das Array [1,2,3], wird auf diesem Array die Methode <code>foldRight()</code>
+                mit der reducer-Funktion <code>(a,b) => a + b</code> angewendet, so wird das Ergebnis folgender maßen evaluiert:
+                (1 + (2 + 3))
+              </p>
+              <p>Im gegensatz dazu würde das gleiche Array mit <code>reduceRight()</code> und der selben reducer-Funktion
+                zu ((3 + 2) + 1) evaluiert werden.
+              </p>
+              <p>
+                <b>Hinweis:</b> recherchieren Sie wie sie weitere Methoden einer Klasse hinzufügen können.
+              </p>
+            </td>
+          </tr>
+          <tr><td><b>command</b></td><td><b>expected</b></td><td><b>output</b></td></tr>
+        </tbody>
+      </table>
+    </div>
+
+    <!-- Aufgabe 2 -->
+    <div>
+      <table width="50%" style="margin: 0 auto;">
+        <tbody id="a02">
+          <tr><td colspan="3"><h3>Aufgabe 2: The Return of Bobs Getränke GmbH (5 Punkte)</h3></td></tr>
+          <tr>
+            <td colspan="3">
+              <p>Betrachten Sie die Datei <code>index.js</code></p>
+              <p>
+                Bobs Getränke GmbH hat seinen Getränkemarkt etwas expandiert und im gleichen Zuge auch seine Getränke-Datenbank
+                um weitere Daten erweitert. Sie finden in der Datenbank alle Getränke die Bob vertreibt mit den zusätzlichen
+                Informationen im folgenden Format:
+              </p>
+              <code>
+                {<br>
+                  &nbsp;&nbsp;Brand: "Name des Getränks",<br>
+                  &nbsp;&nbsp;type: "Beer, Soft Drink oder Liquor",<br>
+                  &nbsp;&nbsp;size: "größe einer Flasche in Liter",<br>
+                  &nbsp;&nbsp;price: "Kosten die Bob hat um einen Liter dieses Getränkes zu kaufen"<br>
+                  &nbsp;&nbsp;inStock: "Wieviele Flaschen Bob im Lager hat"<br>
+                  &nbsp;&nbsp;capacity: "Wieviele Liter dieses Getränks Bob im Lager maximal halten kann"<br>
+                  &nbsp;&nbsp;ordered: "Wieviele Flaschen Bob von diesem Getränk schon bestellt hat die noch nicht angekommen sind"<br>
+                }
+              </code>
+              <p>
+                Schreiben Sie die Funktion <code>calculateCost()</code> welche die Getränke-Datenbank in Form eines Arrays übergeben
+                bekommt. Berechnen Sie wie groß Bobs kosten wären, wenn er heute noch weitere Getränke jeden Typs bestellt und damit
+                sein Lager komplett füllt. Verwenden Sie ausschließlich <code>filter(), map()</code> und <code>reduce()</code>.
+              </p>
+              <p>
+                <b>Beachte:</b> Es ist möglich, dass der Preis einer einzelnen Getränkelieferung Bruchteile eines cents beinhaltet. Der Getränke-Lieferant berechnet jedes Getränk als eigene Bestellung und rundet auf volle cent-Beträge.
+              </p>
+              <p>
+                <b>Hinweis: </b> Falls Bob keine Getränke eines Typs bestellt hat, so hat <code>ordered</code> den Wert <code>"None"</code>. Beachten Sie auch, dass capacity, ordered sowie inStock verschiedene Metriken verwenden.
+              </p>
+            </td>
+          </tr>
+          <tr><td><b>command</b></td><td><b>expected</b></td><td><b>output</b></td></tr>
+        </tbody>
+      </table>
+    </div>
+
+    <!-- scripts -->
+    <script src="db/arrays.js"></script>
+    <script src="index.js"></script>
+    <script src="data.js"></script>
+    <script>
+      data
+        .map((e) => {
+          let expected = (typeof e.expected === "object") ? output(e.expected) : e.expected;
+          e["html"] = 
+            "<tr>" +
+              "<td>" + e.cmd + "</td>" +
+              "<td>" + expected + "</td>" + 
+              "<td id='" + e.id + "'></td>" + 
+            "</tr>";
+          return e;
+        })
+        .forEach((e) => {
+          let result = [];
+          try {
+            result = eval(e.cmd);
+          } catch (err) {
+            console.error(err);
+          }
+          
+          document.getElementById(e.id.split("-")[0]).innerHTML += e.html;
+          let cell = document.getElementById(e.id);
+          cell.innerHTML = output(result);
+          let expected = (typeof e.expected === "object") ? output(e.expected) : e.expected;
+          if (output(result) == expected) {
+            cell.style.background = "lightgreen";
+          } else {
+            cell.style.background = "lightcoral";
+          }
+        })
+
+      function output(string) {
+/*        if(typeof(string) == "undefined") return string*/
+        return JSON.stringify(string).replaceAll(",", ", ")
+      }    
+    </script>
+  </body>
+</html>

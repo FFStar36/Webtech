@@ -1,0 +1,180 @@
+<html>
+    <head>
+        <title>FlightBooker</title>    
+        <meta charset="UTF-8">
+        <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+        <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+    </head>
+    <body class="bg-light">
+        <div id="app" class="container">
+            <div class=row>
+                <div class="p-1 col-6">
+                    <div class="card p-2" style="height: 100%">
+                        <div>
+                            <input v-model="flightnumber" placeholder="Flugnummer" class="form-control">
+                            <button @click="getFlightNum" class="btn btn-secondary col-2 mt-1" style="min-width: 200px">Flug suchen</button>
+                        </div> 
+                    </div>
+                </div>
+                
+                <div class="p-1 col-6">
+                    <div class="card p-2">
+                        <select v-model="depSelected" class="form-control">
+                            <option value="" selected disabled hidden>Start</option>
+                            <option v-for="dep in airports" :value="dep">{{dep}}</option>
+                        </select>
+
+                        <select v-model="destSelected" class="form-control mt-1">
+                            <option value="" selected disabled hidden>Ziel</option>
+                            <option v-for="dest in airports" :value="dest">{{dest}}</option>
+                        </select>
+                        <button @click="getFlights" class="btn btn-secondary col-2 mt-1" style="min-width: 200px">Flüge suchen</button>
+                    </div>
+                </div>
+            </div>
+            
+            <div class=row>
+                <div class="card p-2 m-1 col" v-if="results.length > 0 && !error">
+                    <table class="table">
+                        <thead>
+                            <tr>
+                                <th scope="col">Flugnr.</th>
+                                <th scope="col">Start</th>
+                                <th scope="col">Ziel</th>
+                                <th scope="col">Datum</th>
+                                <th scope="col">Preis</th>
+                                <th scope="col"></th>
+                            </tr>
+                            <tr v-for="flight in results">
+                                <td>{{flight.flightnumber}}</td>
+                                <td>{{flight.departure}}</td>
+                                <td>{{flight.destination}}</td>
+                                <td>{{flight.date}}</td>
+                                <td>{{flight.price}}€</td><td>
+                                    <button class="btn btn-secondary" @click="patchFlightInfo(flight)">Debug PATCH senden</button>
+                                </td>
+                            </tr>
+                        </thead>
+                    </table>
+                </div>
+            </div>
+            
+            <div class="alert alert-danger" v-if="error">Keine Flüge gefunden!</div>
+        </div>
+    </body>
+    
+    <script>
+        new Vue({
+            el: '#app',
+            data: {
+                flightnumber: '',
+                depSelected: '',
+                destSelected: '',
+                airports: [
+                    'Berlin',
+                    'London',
+                    'Dublin',
+                    'Madrid'
+                ],
+                results: [],
+                error: false
+            },
+            methods: {
+                getFlights: function() {
+                    var params = '';
+                    var url = '/flights';
+                    
+                    if(this.depSelected.length > 0) {
+                        url += `/${this.depSelected}`;
+                    }
+                    
+                    if(this.destSelected.length > 0) {
+                        params += `destination=${this.destSelected}`;
+                    }
+                    
+                    if(params.length > 0) {
+                        url += '?' + params;
+                    }
+                    
+                    console.log(url);
+                        
+                    var xhttp = new XMLHttpRequest();
+                    
+                    xhttp.onreadystatechange = () => {
+                        
+                        if(xhttp.readyState == 4) {
+                            if(xhttp.status == 200) {
+                                console.log(xhttp.responseText);
+                                var res = JSON.parse(xhttp.responseText);
+                                console.log(res);
+                                this.results = res;
+                                this.error = false;
+                            } else if(xhttp.status == 404) {
+                                this.error = true;
+                            }
+                        }
+                    };
+                    
+                    xhttp.open('GET', url, true);
+                    xhttp.send();
+                },
+                getFlightNum: function() {
+                    var url = '/flights/flightnumber/';
+                    
+                    if(this.flightnumber.length > 0) {
+                        url += this.flightnumber;
+                        
+                        console.log(url);
+                        
+                        var xhttp = new XMLHttpRequest();
+
+                        xhttp.onreadystatechange = () => {
+
+                            if(xhttp.readyState == 4) {
+                                if(xhttp.status == 200) {
+                                    console.log(xhttp.responseText);
+                                    var res = JSON.parse(xhttp.responseText);
+                                    console.log(res);
+                                    this.results = res;
+                                    this.error = false;
+                                } else if(xhttp.status == 404) {
+                                    this.error = true;
+                                }
+                            }
+                        };
+
+                        xhttp.open('GET', url, true);
+                        xhttp.send();
+                    } else {
+                        this.error = true;
+                    } 
+                },
+                patchFlightInfo: function(flight) {
+
+                    var url = '/flights';
+                    var xhttp = new XMLHttpRequest();
+
+                    var urlencoded = 
+                        "date=" + flight.date + 
+                        "&departure=" + flight.departure + 
+                        "&destination=" + flight.destination +
+                        "&flightnumber=" + flight.flightnumber +
+                        "&price=" + flight.price;
+                        
+                    console.log(urlencoded);
+
+                    xhttp.onreadystatechange = () => {
+
+                        if(xhttp.readyState == 4) {
+                            console.log(xhttp.status);
+                        }
+                    };
+
+                    xhttp.open('PATCH', url, true);
+                    xhttp.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
+                    xhttp.send(urlencoded);
+                }
+            }
+        });
+    </script>
+</html>

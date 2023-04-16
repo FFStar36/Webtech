@@ -1,0 +1,56 @@
+* {
+    margin: 0;
+    padding: 0;
+}
+
+#background {
+  background-image: url("images/bg.png");
+  width: 1920px;
+  height: 1280px;
+}
+
+.runner {
+  border: 10px solid red;
+}
+
+/* ! Die Positionen können browserbedingt um ein paar Pixel variieren ! */
+
+#runner3 {
+  position: absolute;
+  top: 268px;
+  left: 132px;
+}
+
+#runner2 {
+  position: absolute;
+  top: 307px;
+  left: 399px;
+}
+
+#runner1 {
+  position: absolute;
+  top: 258px;
+  right: 182px; /* setzt voraus, dass das Fenster genau 1920px breit ist, ansonsten left: 1170px; */
+}
+
+/* relative: 
+#runner1 {
+  position: relative;
+  top: 258px;
+  left: 617px;
+}
+
+#runner2 {
+  position: relative;
+  top: -116px;
+  left: 127px;
+}
+
+#runner3 {
+  position: relative;
+  top: -132px;
+  left: 132px;
+}*/ 
+  
+  
+  

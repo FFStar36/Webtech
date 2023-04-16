@@ -1,0 +1,62 @@
+<!doctype html>
+<html lang="de">
+	<head>
+		<title>Meet someone new!</title>
+		
+		<meta charset="utf-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1">
+		
+		<!-- Bootstrap CSS -->
+		<link 
+			href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" 
+			rel="stylesheet" 
+			integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous" >
+
+		
+	</head>
+	<body style="padding: 20px">
+
+		<!-- Card -->
+
+		<div class="card" style="width: 32rem; position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%);">
+			<div class="d-flex justify-content-center">
+				<div id="loadingSpinner" class="p-12 spinner-border text-primary d-none" role="status"></div>
+			</div>
+			<div class="d-flex justify-content-center">
+				<div id="loadingText" class="p-12"></div>
+			</div>
+			
+		
+		
+			<img id="profilePic" src="" alt="" style="max-height: 60vh; width: auto;">
+		
+			<div id="card-body" class="card-body d-none">
+
+				<h5 class="card-title">Hi!</h5>
+				<p class="card-text">
+			
+					My name is 
+					<span id="name">Name</span>!
+					<br>
+					I'm 
+					<span id="age">Age</span> years old
+					<br>
+					and live in
+					<span id="city">City</span>,
+					<span id="country">Country</span>.
+				
+				</p>
+			</div>
+			<button type="button" class="btn btn-primary" id="meet">Let's meet someone new!</button>
+			<button type="button" class="btn btn-danger" id="roulette">Let's play JS roulette!</button>
+
+		</div>
+
+
+	<!-- von Bootstrap benötigtes JS -->
+		<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p" crossorigin="anonymous">
+		</script>
+
+		<script src="./index-lsg.js"></script>
+	</body>
+</html>

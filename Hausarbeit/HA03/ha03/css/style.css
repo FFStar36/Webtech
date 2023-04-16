@@ -1,0 +1,64 @@
+/* Hausaufgabe hier bearbeiten: */
+
+/* Aufgabe 3.2.1 */
+#a11 {
+    position: absolute;
+    left: 100px;
+    top: 100px;
+}
+
+#a12 {
+    position: absolute;
+    left: 200px;
+    top: 200px;
+
+}
+
+#a13 {
+    position: absolute;
+    left: 200px;
+    top: 150px;
+}
+
+
+/* Aufgabe 3.2.2 */
+#a21 {
+    position: relative;
+    left: 100px;
+    top: 100px;
+}
+
+#a22 {
+    position: relative;
+    left: 200px;
+    top: 150px;
+}
+
+#a23 {
+    position: relative;
+    left: 200px;
+    top: 50px;
+}
+
+
+/* Aufgabe 3.2.3 */
+.wrapper {
+    display: grid;
+    grid-auto-rows: 50px;
+    grid-auto-columns: 50px;
+}
+
+#a31 {
+    grid-column-start: 6;
+    grid-row-start: 2;
+}
+
+#a32 {
+    grid-column-start: 3;
+    grid-row-start: 4;
+}
+
+#a33 {
+    grid-column-start: 2;
+    grid-row-start: 1;
+}
