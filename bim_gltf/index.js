@@ -1,26 +1,55 @@
 import { Color } from "three";
 import { IfcViewerAPI } from "web-ifc-viewer";
-import {
-    IFCWALL,
-    IFCWALLSTANDARDCASE,
-    IFCSLAB,
-    IFCWINDOW,
-    IFCMEMBER,
-    IFCPLATE,
-    IFCCURTAINWALL,
-    IFCDOOR} from 'web-ifc';
 
-const container = document.getElementById("viewer-container");
-const viewer = new IfcViewerAPI({
-    container,
-    backgroundColor: new Color(0xffffff),
-});
-viewer.axes.setAxes();
-viewer.grid.setGrid();
+let container;
+let viewer;
+let properties;
 
-const input = document.getElementById("file-input");
+// Script
+setUpViewer();
+const inputIFC = document.getElementById("fileInputIFC");
+inputIFC.onchange = generateGLTF;
+generateModelByJSON_GLTF(); // only for rollup to include function -> not good, better define in rollup config
 
-async function loadIfc(event) {
+// events
+window.ondblclick = async () => {
+    const result = await viewer.IFC.selector.pickIfcItem(true);
+    const foundProperties = properties[result.id];
+    console.log(foundProperties);
+};
+
+// functions
+function getURL(fileInput){
+    const file = fileInput.files[0]; // Die ausgewählte Datei
+    if (!file) {
+        console.error("Keine Datei ausgewählt.");
+        return;
+    }
+    return URL.createObjectURL(file); // Die URL der ausgewählten Datei
+}
+
+async function generateModelByJSON_GLTF(){
+    const URL_GLTF = getURL(document.getElementById("fileInputGLTF")); // Das Element des GLTF-Inputs
+    const URL_JSON = getURL(document.getElementById("fileInputJSON")); // Das Element des GLTF-Inputs
+    console.log(URL_GLTF);
+    await viewer.GLTF.loadModel(URL_GLTF);
+
+    // Load properties
+    const rawProperties  = await fetch(URL_JSON);
+    properties = await rawProperties.json();
+}
+
+async function setUpViewer() {
+    container = document.getElementById("viewer-container");
+    viewer = new IfcViewerAPI({
+        container,
+        backgroundColor: new Color(0xffffff),
+    });
+    viewer.axes.setAxes();
+    viewer.grid.setGrid();
+}
+
+async function generateGLTF(event) {
     const file = event.target.files[0];
     const url = URL.createObjectURL(file);
     // let ifcModel = await viewer.IFC.loadIfcUrl(url);
@@ -63,4 +92,5 @@ async function loadIfc(event) {
     // Removing the Node created for link
     link.remove();
 }
-input.onchange = loadIfc;
+
+

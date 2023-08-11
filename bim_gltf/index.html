@@ -6,12 +6,30 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="styles.css">
-    <title>IFC.js</title>
+    <title>GLTF Export/Importer</title>
 </head>
 <body>
 <div id="viewer-container">
-    <input type="file" id="file-input">
+    <label for="fileInputIFC">Generate GLTF</label>
+    <input type="file" id="fileInputIFC" accept=".ifc">
+
+    <form id="generateModelForm">
+        <label for="fileInputGLTF">Input GLTF </label>
+        <input type="file" id="fileInputGLTF" accept=".gltf">
+
+        <label for="fileInputJSON">Input JSON </label>
+        <input type="file" id="fileInputJSON" accept=".json">
+
+        <input type="submit" value="Generate Model">
+    </form>
 </div>
 <script src="bundle.js"></script>
+<script>
+    document.getElementById("generateModelForm").addEventListener("submit", function(event) {
+        event.preventDefault(); // Verhindert das tatsächliche Absenden des Formulars
+
+        generateModelByJSON_GLTF(); // Ruft die Funktion aus bundle.js auf
+    });
+</script>
 </body>
 </html>
